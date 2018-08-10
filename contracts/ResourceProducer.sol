@@ -128,5 +128,8 @@ contract ResourceProducer {
     function _calculateUnclaimedResources() constant private returns(uint _amount) {
         uint32 numBlocksPast = uint32(block.number) - blockNumberUpdated;
         _amount = numBlocksPast * getRateAtLevel(level);
+        if(_amount > maxSupply) {
+            _amount = maxSupply;    
+        }
     }
 }
