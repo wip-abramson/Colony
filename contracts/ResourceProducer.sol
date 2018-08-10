@@ -63,8 +63,7 @@ contract ResourceProducer {
     constructor(uint _maxSuppy, ERC20 _resourceType, uint8[] _levelRates, uint8[] _upgradeCosts) public {
         require(_maxSuppy > 0);
         require(_levelRates.length == _upgradeCosts.length);
-        //TODO determine if this is a valid business rule e.g. will some resources be allocated at the start. 
-        require(_upgradeCosts[0] == 0);
+        maxSupply = _maxSuppy;
         //TODO think about handling other business logic such as valid level rates
         levelRates = _levelRates;
         upgadeCosts = _upgradeCosts;
