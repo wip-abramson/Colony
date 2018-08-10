@@ -137,12 +137,4 @@ contract ResourceProducer {
             _amount = maxSupply;    
         }
     }
-    
-    function getBlockNumber32() public constant returns(uint32) {
-        return uint32(block.number);    
-    }
-    
-    function getBlockNumber() public constant returns(uint) {
-        return block.number;    
-    }
 }
