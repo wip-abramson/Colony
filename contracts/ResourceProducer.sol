@@ -89,7 +89,9 @@ contract ResourceProducer {
      */
     function becomeBenefactorOfResource() external {
         if(resourceBenefactor == address(0x0)) {
-            blockNumberUpdated = uint32(block.number);
+            blockNumberUpdated = uint32(block.number) + 1;
+            assert(blockNumberUpdated > block.number);
+            _upgrade();
         }
         resourceBenefactor = msg.sender;
     }
@@ -109,6 +111,10 @@ contract ResourceProducer {
         require(blockNumberUpdated != 0 && resourceBenefactor != address(0x0));
         require(msg.sender == resourceBenefactor);
         claimAccruedResource();
+        _upgrade();
+    }
+    
+    function _upgrade() private {
         uint available = resourceType.balanceOf(msg.sender);
         uint8 nextLevel = level + 1;
         uint8 cost = getUpgradeCostForLevel(nextLevel);
@@ -130,5 +136,13 @@ contract ResourceProducer {
         if(_amount > maxSupply) {
             _amount = maxSupply;    
         }
+    }
+    
+    function getBlockNumber32() public constant returns(uint32) {
+        return uint32(block.number);    
+    }
+    
+    function getBlockNumber() public constant returns(uint) {
+        return block.number;    
     }
 }
