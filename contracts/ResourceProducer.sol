@@ -57,10 +57,10 @@ contract ResourceProducer {
     // Supports upto 255 different resource types
     ERC20 public resourceType;
     
-    uint8[] levelRates;
-    uint8[] upgadeCosts;
+    uint[] levelRates;
+    uint[] upgadeCosts;
     
-    constructor(uint _maxSuppy, ERC20 _resourceType, uint8[] _levelRates, uint8[] _upgradeCosts) public {
+    constructor(uint _maxSuppy, ERC20 _resourceType, uint[] _levelRates, uint[] _upgradeCosts) public {
         require(_maxSuppy > 0);
         require(_levelRates.length == _upgradeCosts.length);
         maxSupply = _maxSuppy;
@@ -72,12 +72,12 @@ contract ResourceProducer {
         resourceBenefactor = address(0x0);
     }
     
-    function getUpgradeCostForLevel(uint8 _level) public constant returns(uint8) {
+    function getUpgradeCostForLevel(uint8 _level) public constant returns(uint) {
         require(_level > 0);
         return upgadeCosts[(_level - 1)];
     }
     
-    function getRateAtLevel(uint8 _level) public constant returns(uint8) {
+    function getRateAtLevel(uint8 _level) public constant returns(uint) {
         require(_level > 0);
         return levelRates[(_level - 1)];
     }
@@ -117,7 +117,7 @@ contract ResourceProducer {
     function _upgrade() private {
         uint available = resourceType.balanceOf(msg.sender);
         uint8 nextLevel = level + 1;
-        uint8 cost = getUpgradeCostForLevel(nextLevel);
+        uint cost = getUpgradeCostForLevel(nextLevel);
         require(available >= cost);
         level = nextLevel;
     }
