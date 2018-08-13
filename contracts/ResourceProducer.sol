@@ -119,6 +119,9 @@ contract ResourceProducer {
         uint8 nextLevel = level + 1;
         uint cost = getUpgradeCostForLevel(nextLevel);
         require(available >= cost);
+        // Burn the resources
+        // TODO decide if there's something better to do with the resources e.g. transfer them back to the owner of the resource.
+        require(resourceType.transferFrom(msg.sender, address(0x0), cost));
         level = nextLevel;
     }
     
