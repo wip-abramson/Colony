@@ -46,6 +46,8 @@ contract ERC20 {
 contract ResourceProducer {
     // The address of the player that currently benefits from controlling the resource.
     address public resourceBenefactor;
+    // Supports upto 255 different resource types
+    ERC20 public resourceType;
     //TODO determine if it is worth reducing the datatype to something smaller
     // The current amount of the resource that is remaining to be aqcuired. 
     uint public maxSupply;
@@ -54,8 +56,6 @@ contract ResourceProducer {
     uint32 public blockNumberUpdated;
     // A uint8 can store up to 255 levels 
     uint8 public level;
-    // Supports upto 255 different resource types
-    ERC20 public resourceType;
     
     uint[] levelRates;
     uint[] upgadeCosts;
