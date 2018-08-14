@@ -3,6 +3,7 @@ app.db
 chaindata
 genesis.json
 loom
+.idea
 
 # If you want to versioning build files (and it is recommended) you should remove or comment the line below
 src/contracts
