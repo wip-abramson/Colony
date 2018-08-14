@@ -1,0 +1,7 @@
+.resourceBar {
+
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+}
+
