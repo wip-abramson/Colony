@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "loom-js": "^1.16.2"
+    "loom-js": "^1.16.2",
+    "openzeppelin-solidity": "^1.12.0"
   }
 }
