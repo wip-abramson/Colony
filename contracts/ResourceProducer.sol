@@ -46,10 +46,9 @@ contract ERC20 {
 contract ResourceProducer {
     // The address of the player that currently benefits from controlling the resource.
     address public resourceBenefactor;
-    // Supports upto 255 different resource types
     ERC20 public resourceType;
     //TODO determine if it is worth reducing the datatype to something smaller
-    // The current amount of the resource that is remaining to be aqcuired. 
+    // The current amount of the resource that is remaining to be acquired.
     uint public maxSupply;
     // A uint32 can store up to the number 4,294,967,295. After a little over 3 years of the Ethereum network being live it is at block number 6,115,930, so this size variable supports the contract way beyond its expected usefulness. 
     // uint24 can store up to the number 16,777,216 ...
@@ -121,7 +120,7 @@ contract ResourceProducer {
         require(available >= cost);
         // Burn the resources
         // TODO decide if there's something better to do with the resources e.g. transfer them back to the owner of the resource.
-        require(resourceType.transferFrom(msg.sender, address(0x0), cost));
+        require(resourceType.transferFrom(msg.sender, address(0xdeed), cost));
         level = nextLevel;
     }
     
