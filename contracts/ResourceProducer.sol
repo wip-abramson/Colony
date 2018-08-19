@@ -90,6 +90,7 @@ contract ResourceProducer {
      */
     function becomeBenefactorOfResource() external {
         if(resourceBenefactor == address(0x0)) {
+            // It takes a little while for resource production to come online (start production from the next block).
             blockNumberUpdated = uint32(block.number) + 1;
             assert(blockNumberUpdated > block.number);
             _upgrade();
@@ -101,9 +102,7 @@ contract ResourceProducer {
         require(msg.sender == resourceBenefactor);
         uint amountAccroued = _calculateUnclaimedResources();
         maxSupply = maxSupply - amountAccroued;
-        uint32 nextBlockNumber = uint32(block.number) + 1;
-        assert(nextBlockNumber > block.number);
-        blockNumberUpdated = nextBlockNumber;
+        blockNumberUpdated = uint32(block.number);
         require(resourceType.transfer(msg.sender, amountAccroued) == true);
     }
     
