@@ -1,8 +1,25 @@
 const ResourceProducer = artifacts.require("./ResourceProducer.sol");
 const Wood = artifacts.require("./Wood.sol");
 
-module.exports = async function(deployer) {
-    let woodResource = await Wood.deployed();
-    console.log(woodResource);
-    deployer.deploy(ResourceProducer);
+module.exports = function(deployer, network, accounts) {
+    let quantity = 1000;
+    let scalar = web3.toWei(1, 'ether');
+    let quantityAsTokens = quantity * scalar;
+    let upgradeCosts = [100 * scalar, 400 * scalar, 1000 * scalar];
+    let upgradeRewards = [100 * scalar, 200 * scalar, 5000 * scalar];
+    let woodResourceInstance;
+
+    return Wood.deployed()
+        .then(function (woodInstance) {
+            woodResourceInstance = woodInstance;
+            console.log('the address of the wood', woodResourceInstance.address);
+            return deployer.deploy(ResourceProducer, quantityAsTokens, woodResourceInstance.address, upgradeCosts, upgradeRewards);
+        })
+        .then(function (resourceProducerInstance) {
+            console.log('the address of the rp', resourceProducerInstance.address);
+            return woodResourceInstance.mint(resourceProducerInstance.address, quantityAsTokens);
+        })
+        .then(function () {
+            return woodResourceInstance.mint(accounts[1], 100 * scalar);
+        });
 };
