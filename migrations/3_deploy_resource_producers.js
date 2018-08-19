@@ -9,7 +9,10 @@ module.exports = function(deployer, network, accounts) {
     let upgradeRewards = [100 * scalar, 200 * scalar, 5000 * scalar];
     let woodResourceInstance;
 
-    return Wood.deployed()
+    return deployer
+        .then(function() {
+            return Wood.deployed()
+        })
         .then(function (woodInstance) {
             woodResourceInstance = woodInstance;
             console.log('the address of the wood', woodResourceInstance.address);
