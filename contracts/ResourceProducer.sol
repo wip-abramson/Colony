@@ -55,14 +55,16 @@ contract ResourceProducer {
     uint32 public blockNumberUpdated;
     // A uint8 can store up to 255 levels 
     uint8 public level;
+    uint8 public maxLevel;
     
-    uint[] levelRates;
-    uint[] upgadeCosts;
+    uint[] public levelRates;
+    uint[] public upgadeCosts;
     
     constructor(uint _maxSuppy, ERC20 _resourceType, uint[] _levelRates, uint[] _upgradeCosts) public {
         require(_maxSuppy > 0);
         require(_levelRates.length == _upgradeCosts.length);
         maxSupply = _maxSuppy;
+        maxLevel = uint8(_levelRates.length);
         //TODO think about handling other business logic such as valid level rates
         levelRates = _levelRates;
         upgadeCosts = _upgradeCosts;
