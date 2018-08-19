@@ -15,7 +15,7 @@ module.exports = function(deployer, network, accounts) {
         })
         .then(function (woodInstance) {
             woodResourceInstance = woodInstance;
-            return deployer.deploy(ResourceProducer, quantityAsTokens, woodResourceInstance.address, upgradeCosts, upgradeRewards);
+            return deployer.deploy(ResourceProducer, quantityAsTokens, woodResourceInstance.address, upgradeRewards, upgradeCosts);
         })
         .then(function (resourceProducerInstance) {
             return woodResourceInstance.mint(resourceProducerInstance.address, quantityAsTokens);
