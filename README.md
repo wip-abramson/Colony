@@ -33,3 +33,10 @@ The players will then be allocated a number of resources in the ERC20 tokens.
 The ERC20 token contract will then be locked that no more resources may be created. 
 
 *Note: the rest of the game artifacts have yet to be designed, but there will likely be more contract to be deployed.*
+
+# Getting started
+
+## Testing
+### Smart Contract Tests
+> truffle develop
+> test
