@@ -9,10 +9,10 @@ const privateKey = readFileSync('./private_key', 'utf-8')
 const loomTruffleProvider = new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey)
 
 module.exports = {
-  networks: {
-    loom_dapp_chain: {
-      provider: loomTruffleProvider,
-      network_id: '*'
+    networks: {
+        loom_dapp_chain: {
+            provider: loomTruffleProvider,
+            network_id: '*'
+        }
     }
-  }
 }
